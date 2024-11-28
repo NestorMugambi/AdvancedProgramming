@@ -7,28 +7,31 @@ public class Main {
         // Create a bank account with an initial balance
         BankAccount account = new BankAccount(500.0);
 
-        // Create a deposit transaction
+        // Create a withdrawal transaction
         Calendar date = Calendar.getInstance();
-        DepositTransaction deposit = new DepositTransaction(200.0, date);
+        WithdrawalTransaction withdrawal = new WithdrawalTransaction(100.0, date);
 
         // Print transaction details
-        deposit.printTransactionDetails();
+        withdrawal.printTransactionDetails();
 
-        // Apply the transaction to the account
+        // Apply the withdrawal transaction
         try {
-            deposit.apply(account);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
+            withdrawal.apply(account);
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            System.out.println("Transaction Failed: " + e.getMessage());
         }
 
         // Print the updated balance
-        System.out.println("Final Account Balance: " + account.getBalance());
+        System.out.println("Account Balance After Withdrawal: " + account.getBalance());
 
-        // Attempt to revert the deposit
+        // Reverse the withdrawal
         try {
-            deposit.revert(account);
-        } catch (UnsupportedOperationException e) {
-            System.out.println("Revert Failed: " + e.getMessage());
+            withdrawal.reverse(account);
+        } catch (Exception e) {
+            System.out.println("Reversal Failed: " + e.getMessage());
         }
+
+        // Print the final balance
+        System.out.println("Final Account Balance: " + account.getBalance());
     }
 }
