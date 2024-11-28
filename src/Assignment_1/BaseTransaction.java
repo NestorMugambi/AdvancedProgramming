@@ -3,7 +3,7 @@ package Assignment_1;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class BaseTransaction implements TransactionInterface {
+public abstract class BaseTransaction implements TransactionInterface {
     private double amount; // The transaction amount
     private Calendar date; // The transaction date
     private String transactionID; // The unique identifier for the transaction
@@ -32,6 +32,9 @@ public class BaseTransaction implements TransactionInterface {
     public String getTransactionID() {
         return transactionID;
     }
+
+    // Abstract method to apply the transaction to a BankAccount
+    public abstract void apply(BankAccount account);
 
     // Helper method to generate a unique identifier
     private String generateTransactionID() {
